@@ -9,10 +9,14 @@ mod tests {
     #[test]
     fn move_semantics4() {
         let mut x = Vec::new();
-        let y = &mut x;
-        let z = &mut x;
-        y.push(42);
-        z.push(13);
+        {
+            let y = &mut x;
+            y.push(42);
+        }
+        {//y의 생명주기가 끝난 후 z 선언언
+            let z = &mut x;
+            z.push(13);
+        }
         assert_eq!(x, [42, 13]);
     }
 }
