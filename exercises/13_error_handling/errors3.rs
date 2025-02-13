@@ -15,7 +15,10 @@ fn total_cost(item_quantity: &str) -> Result<i32, ParseIntError> {
 
 // TODO: Fix the compiler error by changing the signature and body of the
 // `main` function.
-fn main() {
+// 아래 main 함수에서 ? 오퍼레이터를 사용하려면 result 속성으로 변환이 이뤄져야함
+// 그러기 위해서는 return 타입을 명시해줄 필요가 있음
+// 따라서 Result<(), ParseIntError> 명시 - ()는 아무값도 리턴하지 않음을 의미
+fn main() -> Result<(), ParseIntError> {
     let mut tokens = 100;
     let pretend_user_input = "8";
 
@@ -28,4 +31,6 @@ fn main() {
         tokens -= cost;
         println!("You now have {tokens} tokens.");
     }
+
+    Ok(())
 }
